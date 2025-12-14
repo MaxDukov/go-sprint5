@@ -46,6 +46,6 @@ func (ds DaySteps) ActionInfo() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return fmt.Sprintf("Количество шагов: %i\nДистанция: %.2f км.\nСожгли калорий: %.2f\n", ds.Steps, distance, calories), nil
+	return fmt.Sprintf("Количество шагов: %d\nДистанция: %.2f км.\nСожгли калорий: %.2f\n", ds.Steps, distance, calories), nil
 
 }
