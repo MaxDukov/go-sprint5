@@ -26,9 +26,12 @@ func (t *Training) Parse(datastring string) (err error) {
 	if err != nil {
 		return errors.New("неверный формат данных")
 	}
+	if steps <= 0 {
+		return errors.New("количество шагов должно быть больше 0")
+	}
 	t.Steps = steps
 	t.TrainingType = vals[1]
-	duration, err := time.ParseDuration(vals[1])
+	duration, err := time.ParseDuration(vals[2])
 	if err != nil {
 		return errors.New("неверный формат данных")
 	}
@@ -46,7 +49,7 @@ func (t Training) ActionInfo() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	if t.TrainingType != "Ходьба" || t.TrainingType != "Бег" {
+	if t.TrainingType != "Ходьба" && t.TrainingType != "Бег" {
 		return "", errors.New("неизвестный тип тренировки")
 	}
 	return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", t.TrainingType, t.Duration.Hours(), distance, speed, calories), nil
